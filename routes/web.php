@@ -13,6 +13,11 @@ use App\Models\Post;
 |
 */
 
+Route::get('/single-post/{id}', function ($id) {
+    $post = Post::find($id); // 根據 ID 查詢貼文
+    dd($post);
+});
+
 Route::get('/featured-posts', function () {
     $featuredPosts = Post::where('is_feature', 1)->get(); // 篩選出 is_feature = 1 的貼文
     dd($featuredPosts);
