@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/create-post', function () {
+    Post::create([
+        'title' => 'created title',
+        'content' => 'created content',
+    ]);
+
+    return 'Post created successfully!';
+});
 
 Route::get('/', function () {
     return view('welcome');
