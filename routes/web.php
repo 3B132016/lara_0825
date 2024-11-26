@@ -13,6 +13,52 @@ use App\Models\Post;
 |
 */
 
+Route::get('/comment-post/{id}', function ($id) {
+    $comment = App\Models\Comment::find($id); // 查詢指定 ID 的留言
+
+    if (!$comment) {
+        return "Comment with ID {$id} not found!";
+    }
+
+    // 取得留言所屬的貼文
+    $post = $comment->post;
+
+    echo "留言內容：{$comment->content}<br>";
+    echo "所屬貼文標題：{$post->title}<br>";
+});
+
+Route::get('/post-comments/{id}', function ($id) {
+    $post = App\Models\Post::find($id); // 查詢指定 ID 的貼文
+
+    if (!$post) {
+        return "Post with ID {$id} not found!";
+    }
+
+    // 取得貼文的所有留言
+    $comments = $post->comments;
+
+    echo "貼文標題：{$post->title}<br>";
+    echo "留言清單：<br>";
+
+    foreach ($comments as $comment) {
+        echo "留言內容：{$comment->content}<br>";
+    }
+});
+
+Route::get('/add-comment/{id}', function ($id) {
+    $post = Post::find($id);
+
+    if (!$post) {
+        return "Post with ID {$id} not found!";
+    }
+
+    $post->comments()->create([
+        'content' => 'This is a test comment.',
+    ]);
+
+    return "Comment added to post with ID {$id}!";
+});
+
 Route::get('/latest-post', function () {
     $lastPost = Post::orderBy('id', 'DESC')->first(); // 取得最新一筆資料
     dd($lastPost);
