@@ -13,6 +13,12 @@ use App\Models\Post;
 |
 */
 
+Route::get('/all-posts', function () {
+    $allPosts = Post::all(); // 取得所有貼文（Collection）
+    dd($allPosts); // 顯示 Collection 的內容
+});
+
+
 Route::get('/destroy-posts', function () {
     Post::destroy([2, 3, 5]); // 刪除多筆貼文（ID 為 2, 3, 5）
     return "Posts with IDs 2, 3, 5 deleted successfully!";
