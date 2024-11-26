@@ -13,6 +13,15 @@ use App\Models\Post;
 |
 */
 
+Route::get('/save-post', function () {
+    $post = new Post(); // 創建 Post 的物件
+    $post->title = 'test title'; // 設定 title 欄位
+    $post->content = 'test content'; // 設定 content 欄位
+    $post->save(); // 保存至資料庫
+
+    return 'Post saved successfully!';
+});
+
 Route::get('/create-post', function () {
     Post::create([
         'title' => 'created title',
