@@ -13,6 +13,20 @@ use App\Models\Post;
 |
 */
 
+Route::get('/update-post/{id}', function ($id) {
+    $post = Post::find($id); // 查詢貼文
+    if ($post) {
+        $post->update([
+            'title' => 'updated title',
+            'content' => 'updated content',
+        ]);
+
+        return 'Post updated successfully!';
+    } else {
+        return 'Post not found!';
+    }
+});
+
 Route::get('/filter-posts', function () {
     $posts = Post::where('id', '<', 10)->orderBy('id', 'DESC')->get(); // 查詢 id 小於 10 的貼文，並按降序排序
 
