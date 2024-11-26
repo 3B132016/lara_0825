@@ -13,6 +13,18 @@ use App\Models\Post;
 |
 */
 
+Route::get('/filter-posts', function () {
+    $posts = Post::where('id', '<', 10)->orderBy('id', 'DESC')->get(); // 查詢 id 小於 10 的貼文，並按降序排序
+
+    foreach ($posts as $post) {
+        echo '編號: ' . $post->id . '<br>';
+        echo '標題: ' . $post->title . '<br>';
+        echo '內容: ' . $post->content . '<br>';
+        echo '張貼時間: ' . $post->created_at . '<br><br>';
+    }
+});
+
+
 Route::get('/post/{id}', function ($id) {
     $post = Post::find($id); // 根據主鍵 id 查詢貼文
 
