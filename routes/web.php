@@ -13,6 +13,23 @@ use App\Models\Post;
 |
 */
 
+Route::get('/destroy-posts', function () {
+    Post::destroy([2, 3, 5]); // 刪除多筆貼文（ID 為 2, 3, 5）
+    return "Posts with IDs 2, 3, 5 deleted successfully!";
+});
+
+
+Route::get('/delete-post/{id}', function ($id) {
+    $post = Post::find($id); // 查詢要刪除的貼文
+    if ($post) {
+        $post->delete(); // 刪除貼文
+        return "Post with ID {$id} deleted successfully!";
+    } else {
+        return "Post with ID {$id} not found!";
+    }
+});
+
+
 Route::get('/save-update-post/{id}', function ($id) {
     $post = Post::find($id); // 查詢貼文
     if ($post) {
