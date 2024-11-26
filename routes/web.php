@@ -13,6 +13,17 @@ use App\Models\Post;
 |
 */
 
+Route::get('/posts', function () {
+    $posts = Post::all(); // 取得所有貼文
+
+    foreach ($posts as $post) {
+        echo '編號: ' . $post->id . '<br>';
+        echo '標題: ' . $post->title . '<br>';
+        echo '內容: ' . $post->content . '<br>';
+        echo '張貼時間: ' . $post->created_at . '<br><br>';
+    }
+});
+
 Route::get('/save-post', function () {
     $post = new Post(); // 創建 Post 的物件
     $post->title = 'test title'; // 設定 title 欄位
