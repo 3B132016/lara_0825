@@ -13,6 +13,20 @@ use App\Models\Post;
 |
 */
 
+Route::get('/save-update-post/{id}', function ($id) {
+    $post = Post::find($id); // 查詢貼文
+    if ($post) {
+        $post->title = 'saved title'; // 修改 title 欄位
+        $post->content = 'saved content'; // 修改 content 欄位
+        $post->save(); // 保存至資料庫
+
+        return 'Post saved successfully!';
+    } else {
+        return 'Post not found!';
+    }
+});
+
+
 Route::get('/update-post/{id}', function ($id) {
     $post = Post::find($id); // 查詢貼文
     if ($post) {
