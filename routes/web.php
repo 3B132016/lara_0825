@@ -13,6 +13,11 @@ use App\Models\Post;
 |
 */
 
+Route::get('/latest-post', function () {
+    $lastPost = Post::orderBy('id', 'DESC')->first(); // 取得最新一筆資料
+    dd($lastPost);
+});
+
 Route::get('/single-post/{id}', function ($id) {
     $post = Post::find($id); // 根據 ID 查詢貼文
     dd($post);
