@@ -13,6 +13,12 @@ use App\Models\Post;
 |
 */
 
+Route::get('/featured-posts', function () {
+    $featuredPosts = Post::where('is_feature', 1)->get(); // 篩選出 is_feature = 1 的貼文
+    dd($featuredPosts);
+});
+
+
 Route::get('/all-posts', function () {
     $allPosts = Post::all(); // 取得所有貼文（Collection）
     dd($allPosts); // 顯示 Collection 的內容
