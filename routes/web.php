@@ -13,6 +13,19 @@ use App\Models\Post;
 |
 */
 
+Route::get('/post/{id}', function ($id) {
+    $post = Post::find($id); // 根據主鍵 id 查詢貼文
+
+    if ($post) {
+        echo '編號: ' . $post->id . '<br>';
+        echo '標題: ' . $post->title . '<br>';
+        echo '內容: ' . $post->content . '<br>';
+        echo '張貼時間: ' . $post->created_at . '<br>';
+    } else {
+        echo 'Post not found!';
+    }
+});
+
 Route::get('/posts', function () {
     $posts = Post::all(); // 取得所有貼文
 
